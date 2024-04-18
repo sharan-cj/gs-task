@@ -28,28 +28,24 @@ export const useProductsStore = create<
 
       productRanking: {},
       setRanking: (itemId, index) =>
-        set(
-          (prev) => {
-            const newRanking: Record<string, number> = Object.create(null);
-            console.log(itemId, "itemId");
-            Object.entries(prev.productRanking).forEach(([key, value]) => {
-              if (key === itemId) {
-                newRanking[key] = index;
-              } else if (value >= index) {
-                newRanking[key] = value + 1;
-              } else {
-                newRanking[key] = value;
-              }
-            });
-
-            if (!newRanking[itemId]) {
-              newRanking[itemId] = index;
+        set((prev) => {
+          const newRanking: Record<string, number> = Object.create(null);
+          console.log(itemId, "itemId");
+          Object.entries(prev.productRanking).forEach(([key, value]) => {
+            if (key === itemId) {
+              newRanking[key] = index;
+            } else if (value >= index) {
+              newRanking[key] = value + 1;
+            } else {
+              newRanking[key] = value;
             }
-            return { productRanking: newRanking };
-          }
+          });
 
-          // productRanking: { ...prev.productRanking, },
-        ),
+          if (!newRanking[itemId]) {
+            newRanking[itemId] = index;
+          }
+          return { productRanking: newRanking };
+        }),
 
       draggingItemId: null,
       setDraggingItemId: (id) => set({ draggingItemId: id }),

@@ -50,15 +50,9 @@ export const Home = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log(
-        document.documentElement.scrollTop,
-        window.innerHeight,
-        "hww",
-        document.documentElement.offsetHeight
-      );
       if (loading) return;
       if (
-        window.innerHeight + document.documentElement.scrollTop ===
+        Math.round(window.innerHeight + document.documentElement.scrollTop) ===
         document.documentElement.offsetHeight
       ) {
         setLimit((prev) => prev + 10);
